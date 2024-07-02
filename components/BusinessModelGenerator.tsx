@@ -26,7 +26,7 @@ const BusinessModelGenerator = () => {
       <svg key={index} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
         <line x1={`${(start % 3) * 33.33 + 16.67}%`} y1={`${Math.floor(start / 3) * 33.33 + 16.67}%`}
               x2={`${(end % 3) * 33.33 + 16.67}%`} y2={`${Math.floor(end / 3) * 33.33 + 16.67}%`}
-              stroke="white" strokeWidth="2" />
+              stroke="indigo" strokeWidth="2" strokeDasharray="5,5" />
       </svg>
     ));
   };
