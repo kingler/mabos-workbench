@@ -11,12 +11,20 @@ const BusinessModelGenerator = () => {
   const [selectedBlock, setSelectedBlock] = useState<number | null>(null);
 
   const handleBlockClick = (index: number) => {
+    console.log('Block clicked:', index);
     if (selectedBlock === null) {
+      console.log('Selecting block:', index);
       setSelectedBlock(index);
     } else if (selectedBlock !== index) {
-      setConnections(prev => [...prev, [selectedBlock, index]]);
+      console.log('Creating connection:', selectedBlock, 'to', index);
+      setConnections(prev => {
+        const newConnections = [...prev, [selectedBlock, index]];
+        console.log('New connections:', newConnections);
+        return newConnections;
+      });
       setSelectedBlock(null);
     } else {
+      console.log('Deselecting block:', index);
       setSelectedBlock(null);
     }
   };
