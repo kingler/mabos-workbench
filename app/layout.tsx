@@ -1,6 +1,6 @@
 import '@radix-ui/themes/styles.css' 
 import { Theme } from '@radix-ui/themes'
-// Add this line
+import '../styles/globals.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
