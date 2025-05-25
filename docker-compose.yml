@@ -26,11 +26,11 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://mabos_user:mabos_password@postgres:5432/mabos_db
-      - REDIS_URL=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6380/0
       - NEO4J_URI=bolt://neo4j:7687
       - ELASTICSEARCH_URL=http://elasticsearch:9200
-      - CELERY_BROKER_URL=redis://redis:6379/3
-      - CELERY_RESULT_BACKEND=redis://redis:6379/4
+      - CELERY_BROKER_URL=redis://redis:6380/3
+      - CELERY_RESULT_BACKEND=redis://redis:6380/4
       - DEBUG=true
       - LOG_LEVEL=INFO
     volumes:
@@ -66,17 +66,36 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6380:6379"
+      - "6380:6380"
     volumes:
       - redis_data:/data
-      - ./infrastructure/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./backend/config/redis.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-p", "6380", "ping"]
       interval: 5s
       timeout: 3s
       retries: 5
     restart: unless-stopped
+
+  # ===== Redis Sentinel for High Availability =====
+  redis-sentinel:
+    image: redis:7-alpine
+    ports:
+      - "26379:26379"
+    volumes:
+      - ./backend/config/sentinel.conf:/usr/local/etc/redis/sentinel.conf
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "26379", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+    profiles:
+      - ha
 
   # ===== Neo4j Knowledge Graph Database =====
   neo4j:
@@ -131,9 +150,9 @@ services:
     command: celery -A app.core.celery worker --loglevel=info --concurrency=4
     environment:
       - DATABASE_URL=postgresql://mabos_user:mabos_password@postgres:5432/mabos_db
-      - REDIS_URL=redis://redis:6379/0
-      - CELERY_BROKER_URL=redis://redis:6379/3
-      - CELERY_RESULT_BACKEND=redis://redis:6379/4
+      - REDIS_URL=redis://redis:6380/0
+      - CELERY_BROKER_URL=redis://redis:6380/3
+      - CELERY_RESULT_BACKEND=redis://redis:6380/4
     volumes:
       - ./backend:/app
       - ./shared:/shared
@@ -151,9 +170,9 @@ services:
     command: celery -A app.core.celery beat --loglevel=info
     environment:
       - DATABASE_URL=postgresql://mabos_user:mabos_password@postgres:5432/mabos_db
-      - REDIS_URL=redis://redis:6379/0
-      - CELERY_BROKER_URL=redis://redis:6379/3
-      - CELERY_RESULT_BACKEND=redis://redis:6379/4
+      - REDIS_URL=redis://redis:6380/0
+      - CELERY_BROKER_URL=redis://redis:6380/3
+      - CELERY_RESULT_BACKEND=redis://redis:6380/4
     volumes:
       - ./backend:/app
       - ./shared:/shared
@@ -172,8 +191,8 @@ services:
     ports:
       - "5555:5555"
     environment:
-      - CELERY_BROKER_URL=redis://redis:6379/3
-      - CELERY_RESULT_BACKEND=redis://redis:6379/4
+      - CELERY_BROKER_URL=redis://redis:6380/3
+      - CELERY_RESULT_BACKEND=redis://redis:6380/4
     depends_on:
       - redis
       - celery-worker

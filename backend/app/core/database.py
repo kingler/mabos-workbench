@@ -223,35 +223,58 @@ class Neo4jManager:
 
 
 class RedisManager:
-    """Redis cache and session manager"""
+    """Enhanced Redis cache and session manager with advanced features"""
     
     def __init__(self, config: DatabaseConfig):
         self.config = config
         self.redis_client = None
+        self.cluster_manager = None
         
     async def initialize(self):
-        """Initialize Redis connection"""
+        """Initialize Redis connection with enhanced cluster manager"""
         try:
-            self.redis_client = redis.from_url(
-                self.config.redis_url,
-                max_connections=self.config.redis_max_connections,
-                decode_responses=True
-            )
+            # Import the enhanced Redis manager
+            from app.models.redis_manager import RedisClusterManager
             
-            # Test connection
-            await self.redis_client.ping()
-            logger.info("Redis manager initialized successfully")
+            # Initialize cluster manager
+            self.cluster_manager = RedisClusterManager(self.config)
+            await self.cluster_manager.initialize()
             
+            # Use the cluster manager's Redis client
+            self.redis_client = self.cluster_manager.redis_client
+            
+            logger.info("Enhanced Redis manager initialized successfully")
+            
+        except ImportError:
+            # Fallback to basic Redis if enhanced manager not available
+            logger.warning("Enhanced Redis manager not available, using basic Redis")
+            await self._initialize_basic_redis()
         except Exception as e:
             logger.error(f"Failed to initialize Redis: {e}")
             raise
     
+    async def _initialize_basic_redis(self):
+        """Initialize basic Redis connection as fallback"""
+        self.redis_client = redis.from_url(
+            self.config.redis_url,
+            max_connections=self.config.redis_max_connections,
+            decode_responses=True
+        )
+        
+        # Test connection
+        await self.redis_client.ping()
+        logger.info("Basic Redis manager initialized successfully")
+    
     async def set_cache(self, key: str, value: Any, ttl: int = 3600) -> bool:
         """Set a cache value with TTL"""
         try:
-            serialized_value = json.dumps(value) if not isinstance(value, str) else value
-            await self.redis_client.setex(key, ttl, serialized_value)
-            return True
+            if self.cluster_manager and self.cluster_manager.cache_manager:
+                return await self.cluster_manager.cache_manager.set(key, value, ttl)
+            else:
+                # Fallback to basic caching
+                serialized_value = json.dumps(value) if not isinstance(value, str) else value
+                await self.redis_client.setex(key, ttl, serialized_value)
+                return True
         except Exception as e:
             logger.error(f"Failed to set cache key {key}: {e}")
             return False
@@ -259,13 +282,17 @@ class RedisManager:
     async def get_cache(self, key: str) -> Optional[Any]:
         """Get a cache value"""
         try:
-            value = await self.redis_client.get(key)
-            if value:
-                try:
-                    return json.loads(value)
-                except json.JSONDecodeError:
-                    return value
-            return None
+            if self.cluster_manager and self.cluster_manager.cache_manager:
+                return await self.cluster_manager.cache_manager.get(key)
+            else:
+                # Fallback to basic caching
+                value = await self.redis_client.get(key)
+                if value:
+                    try:
+                        return json.loads(value)
+                    except json.JSONDecodeError:
+                        return value
+                return None
         except Exception as e:
             logger.error(f"Failed to get cache key {key}: {e}")
             return None
@@ -273,8 +300,12 @@ class RedisManager:
     async def delete_cache(self, key: str) -> bool:
         """Delete a cache key"""
         try:
-            result = await self.redis_client.delete(key)
-            return result > 0
+            if self.cluster_manager and self.cluster_manager.cache_manager:
+                return await self.cluster_manager.cache_manager.delete(key)
+            else:
+                # Fallback to basic deletion
+                result = await self.redis_client.delete(key)
+                return result > 0
         except Exception as e:
             logger.error(f"Failed to delete cache key {key}: {e}")
             return False
@@ -289,14 +320,91 @@ class RedisManager:
         key = f"agent:state:{agent_id}"
         return await self.get_cache(key)
     
+    async def create_session(self, user_id: str, session_data: Dict[str, Any]) -> Optional[str]:
+        """Create a user session using enhanced session manager"""
+        try:
+            if self.cluster_manager and self.cluster_manager.session_manager:
+                return await self.cluster_manager.session_manager.create_session(user_id, session_data)
+            else:
+                # Fallback to basic session creation
+                session_id = f"session_{user_id}_{int(time.time())}"
+                await self.set_cache(f"session:{session_id}", session_data, ttl=1800)
+                return session_id
+        except Exception as e:
+            logger.error(f"Failed to create session for user {user_id}: {e}")
+            return None
+    
+    async def get_session(self, session_id: str) -> Optional[Dict[str, Any]]:
+        """Get session data using enhanced session manager"""
+        try:
+            if self.cluster_manager and self.cluster_manager.session_manager:
+                return await self.cluster_manager.session_manager.get_session(session_id)
+            else:
+                # Fallback to basic session retrieval
+                return await self.get_cache(f"session:{session_id}")
+        except Exception as e:
+            logger.error(f"Failed to get session {session_id}: {e}")
+            return None
+    
+    async def cache_workflow_result(self, workflow_id: str, execution_id: str, result: Dict[str, Any]) -> bool:
+        """Cache workflow execution result"""
+        try:
+            if self.cluster_manager and self.cluster_manager.workflow_cache:
+                return await self.cluster_manager.workflow_cache.cache_workflow_result(
+                    workflow_id, execution_id, result
+                )
+            else:
+                # Fallback to basic caching
+                key = f"workflow:result:{workflow_id}:{execution_id}"
+                return await self.set_cache(key, result, ttl=7200)
+        except Exception as e:
+            logger.error(f"Failed to cache workflow result: {e}")
+            return False
+    
+    async def cache_llm_response(self, prompt_hash: str, model: str, response: Dict[str, Any]) -> bool:
+        """Cache LLM response"""
+        try:
+            if self.cluster_manager and self.cluster_manager.llm_cache:
+                return await self.cluster_manager.llm_cache.cache_llm_response(
+                    prompt_hash, model, response
+                )
+            else:
+                # Fallback to basic caching
+                key = f"llm:response:{model}:{prompt_hash}"
+                return await self.set_cache(key, response, ttl=86400)
+        except Exception as e:
+            logger.error(f"Failed to cache LLM response: {e}")
+            return False
+    
     async def health_check(self) -> bool:
         """Check Redis connection health"""
         try:
-            await self.redis_client.ping()
-            return True
+            if self.cluster_manager:
+                health_status = await self.cluster_manager.health_check()
+                return health_status.get("redis_available", False)
+            else:
+                await self.redis_client.ping()
+                return True
         except Exception as e:
             logger.error(f"Redis health check failed: {e}")
             return False
+    
+    async def get_cache_metrics(self) -> Dict[str, Any]:
+        """Get comprehensive cache metrics"""
+        try:
+            if self.cluster_manager:
+                return await self.cluster_manager.health_check()
+            else:
+                # Basic metrics
+                info = await self.redis_client.info()
+                return {
+                    "memory_usage": info.get("used_memory", 0),
+                    "connected_clients": info.get("connected_clients", 0),
+                    "total_keys": await self.redis_client.dbsize()
+                }
+        except Exception as e:
+            logger.error(f"Failed to get cache metrics: {e}")
+            return {}
 
 
 class ElasticsearchManager:
@@ -393,7 +501,7 @@ class ElasticsearchManager:
 class DatabaseManager:
     """
     Unified database manager coordinating PostgreSQL, Neo4j, Redis, and Elasticsearch
-    Implements the MABOS multi-database architecture
+    Implements the MABOS multi-database architecture with SBVR ontology integration
     """
     
     def __init__(self, config: DatabaseConfig = None):
@@ -405,6 +513,14 @@ class DatabaseManager:
         self.redis = RedisManager(self.config)
         self.elasticsearch = ElasticsearchManager(self.config)
         
+        # Initialize SBVR-enabled knowledge graph manager
+        try:
+            from app.models.neo4j_manager import Neo4jKnowledgeGraphManager
+            self.knowledge_graph = Neo4jKnowledgeGraphManager(self.config)
+        except ImportError:
+            logger.warning("Neo4j knowledge graph manager not available")
+            self.knowledge_graph = None
+        
         self._initialized = False
     
     async def initialize(self):
@@ -414,14 +530,19 @@ class DatabaseManager:
         
         logger.info("Initializing MABOS database manager...")
         
-        # Initialize all database managers concurrently
-        await asyncio.gather(
+        # Initialize core database managers concurrently
+        init_tasks = [
             self.postgres.initialize(),
             self.neo4j.initialize(),
             self.redis.initialize(),
-            self.elasticsearch.initialize(),
-            return_exceptions=True
-        )
+            self.elasticsearch.initialize()
+        ]
+        
+        # Add knowledge graph initialization if available
+        if self.knowledge_graph:
+            init_tasks.append(self.knowledge_graph.initialize())
+        
+        await asyncio.gather(*init_tasks, return_exceptions=True)
         
         self._initialized = True
         logger.info("MABOS database manager initialized successfully")

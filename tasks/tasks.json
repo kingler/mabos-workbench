@@ -44,7 +44,7 @@
           "title": "Neo4j Knowledge Graph Configuration",
           "description": "Set up Neo4j for knowledge graphs, ontologies, and relationship mapping",
           "details": "Configure Neo4j clusters for knowledge management. Create graph schemas for business processes, agent relationships, and workflow dependencies. Implement graph traversal algorithms. Set up SPARQL query interfaces. Design ontology storage and retrieval patterns.",
-          "status": "pending",
+          "status": "done",
           "dependencies": [],
           "parentTaskId": 2
         },
@@ -53,7 +53,7 @@
           "title": "Redis Caching & Session Management",
           "description": "Configure Redis for high-performance caching and session storage",
           "details": "Set up Redis clusters for session management. Implement caching strategies for workflow results, LLM responses, and user sessions. Configure persistence and backup for critical cached data. Design cache invalidation patterns. Set up Redis Sentinel for high availability.",
-          "status": "pending",
+          "status": "done",
           "dependencies": [],
           "parentTaskId": 2
         },
