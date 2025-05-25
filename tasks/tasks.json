@@ -11,7 +11,7 @@
       "id": 1,
       "title": "Project Foundation & Architecture Setup",
       "description": "Establish the foundational project structure, development environment, and core architectural components for the MABOS platform",
-      "status": "pending",
+      "status": "done",
       "priority": "high",
       "dependencies": [],
       "details": "Set up the monorepo structure with microservices architecture. Initialize development environment with Docker, Kubernetes, and CI/CD pipeline. Establish coding standards, documentation framework, and project governance structure. Create the foundational directory structure for all services and shared components.",
@@ -35,7 +35,7 @@
           "title": "PostgreSQL Schema & Core Database Setup",
           "description": "Design and implement the main PostgreSQL database with all tables, indexes, and relationships",
           "details": "Create database schema for user management, workflow definitions, agent configurations, and execution logs. Implement proper indexing strategy. Set up foreign key relationships and constraints. Design partitioning strategy for large tables. Include database migration scripts.",
-          "status": "pending",
+          "status": "done",
           "dependencies": [],
           "parentTaskId": 2
         },

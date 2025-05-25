@@ -11,7 +11,7 @@ Implement the complete database architecture as specified in the SARD. Set up Po
 Test database performance under load. Verify data integrity across all databases. Test backup and recovery procedures. Validate schema compliance with business requirements.
 
 # Subtasks:
-## 1. PostgreSQL Schema & Core Database Setup [pending]
+## 1. PostgreSQL Schema & Core Database Setup [done]
 ### Dependencies: None
 ### Description: Design and implement the main PostgreSQL database with all tables, indexes, and relationships
 ### Details:

@@ -1,0 +1,82 @@
+<rdf:RDF xmlns="http://www.omg.org/spec/SBVR/20190601/SBVR-XMI-Metamodel#"
+     xml:base="http://www.omg.org/spec/SBVR/20190601/SBVR-XMI-Metamodel"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <!-- Define ontology -->
+    <owl:Ontology rdf:about="http://www.omg.org/spec/SBVR/20190601/SBVR-XMI-Metamodel"/>
+
+    <!-- Classes based on SBVR Metamodel -->
+    <owl:Class rdf:about="#VocabularyElement">
+        <rdfs:comment>A general element in the business vocabulary.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ConceptType">
+        <rdfs:subClassOf rdf:resource="#VocabularyElement"/>
+        <rdfs:comment>Represents types of concepts in SBVR.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#FactType">
+        <rdfs:subClassOf rdf:resource="#VocabularyElement"/>
+        <rdfs:comment>Represents a fact type, which is a relationship between concepts.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Rule">
+        <rdfs:subClassOf rdf:resource="#VocabularyElement"/>
+        <rdfs:comment>A rule in the SBVR vocabulary.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Object Properties -->
+    <owl:ObjectProperty rdf:about="#defines">
+        <rdfs:domain rdf:resource="#VocabularyElement"/>
+        <rdfs:range rdf:resource="#ConceptType"/>
+        <rdfs:comment>A property indicating that an element defines a concept.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#relatesTo">
+        <rdfs:domain rdf:resource="#FactType"/>
+        <rdfs:range rdf:resource="#ConceptType"/>
+        <rdfs:comment>A property showing the relationship between fact types and concept types.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#constrains">
+        <rdfs:domain rdf:resource="#Rule"/>
+        <rdfs:range rdf:resource="#FactType"/>
+        <rdfs:comment>A rule that constrains a fact type.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- Example Data Properties -->
+    <owl:DatatypeProperty rdf:about="#hasDefinition">
+        <rdfs:domain rdf:resource="#VocabularyElement"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:comment>Provides a definition for a vocabulary element.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <!-- Individual -->
+    <owl:NamedIndividual rdf:about="#ExampleConcept">
+        <rdf:type rdf:resource="#ConceptType"/>
+        <hasDefinition>This is an example concept in SBVR.</hasDefinition>
+    </owl:NamedIndividual>
+
+    <!-- Extend with specific business concepts -->
+    <owl:NamedIndividual rdf:about="#Customer">
+        <rdf:type rdf:resource="#ConceptType"/>
+        <hasDefinition>A person or organization that purchases goods or services.</hasDefinition>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#Purchase">
+        <rdf:type rdf:resource="#FactType"/>
+        <relatesTo rdf:resource="#Customer"/>
+        <relatesTo rdf:resource="#Product"/>
+        <hasDefinition>A transaction where a customer buys a product.</hasDefinition>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#PurchaseRule">
+        <rdf:type rdf:resource="#Rule"/>
+        <constrains rdf:resource="#Purchase"/>
+        <hasDefinition>A rule that defines the conditions under which a purchase can occur.</hasDefinition>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
