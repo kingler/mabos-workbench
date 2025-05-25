@@ -513,6 +513,14 @@ class DatabaseManager:
         self.redis = RedisManager(self.config)
         self.elasticsearch = ElasticsearchManager(self.config)
         
+        # Initialize enhanced analytics manager
+        try:
+            from app.models.elasticsearch_manager import ElasticsearchAnalyticsManager
+            self.elasticsearch_analytics = ElasticsearchAnalyticsManager(self.config)
+        except ImportError:
+            logger.warning("Enhanced Elasticsearch analytics manager not available")
+            self.elasticsearch_analytics = None
+        
         # Initialize SBVR-enabled knowledge graph manager
         try:
             from app.models.neo4j_manager import Neo4jKnowledgeGraphManager
@@ -537,6 +545,10 @@ class DatabaseManager:
             self.redis.initialize(),
             self.elasticsearch.initialize()
         ]
+        
+        # Add enhanced analytics manager initialization if available
+        if self.elasticsearch_analytics:
+            init_tasks.append(self.elasticsearch_analytics.initialize())
         
         # Add knowledge graph initialization if available
         if self.knowledge_graph:
