@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.1",
+  "analysis_metadata": {
+    "language": "Python",
+    "total_lines_analyzed": 23580,
+    "analysis_timestamp": "2025-01-25T18:20:45Z"
+  },
+  "file_structure": {
+    "dify_mabos": { "type": "directory", "children": [
+      "api", "web", "mabos", "sdks", "docker", "dev", "images", ".github", ".obsidian", ".devcontainer",
+      "README.md", "LICENSE", "Makefile", "srd.md", "folder_structure.md", "mabos.plantuml", 
+      "agents_state_machine.plantuml", "onboarding_state_machine.plantuml", "NetworkX.md", "Owlready2.md",
+      "MABOS-Multi-Agent Business Operating System.md", "CONTRIBUTING.md", "AUTHORS", ".gitignore"
+    ]},
+    "dify_mabos/api": { "type": "directory", "children": [
+      "core", "controllers", "models", "services", "extensions", "migrations", "tasks", "events", 
+      "libs", "fields", "schedule", "tests", "templates", "constants", "docker", ".vscode",
+      "app.py", "config.py", "commands.py", "mabos_router.py", "requirements.txt", "pyproject.toml", "Dockerfile"
+    ]},
+    "dify_mabos/mabos": { "type": "directory", "children": [
+      "agents", "bdi", "knowledge_management", "goal_management", "communication", "planning",
+      "task_management", "process_management", "monitoring", "data_management", "event_management",
+      "user_management", "visualization", "configuration", "localization", "logging",
+      "main.py", "onboarding.py", "user_interface.py", "error_handler.py", "mabos.md"
+    ]},
+    "dify_mabos/web": { "type": "directory", "children": [
+      "app", "components", "context", "hooks", "i18n", "models", "service", "types", "utils", "assets", "bin", "config", "docker", "public"
+    ]},
+    "dify_mabos/sdks": { "type": "directory", "children": [
+      "python-client", "nodejs-client", "php-client"
+    ]},
+    "dify_mabos/README.md": { "type": "file" },
+    "dify_mabos/MABOS-Multi-Agent Business Operating System.md": { "type": "file" },
+    "dify_mabos/api/mabos_router.py": { "type": "file" },
+    "dify_mabos/mabos/main.py": { "type": "file" }
+  },
+  "entities": [
+    {
+      "id": "mabos_router.py:router",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "router",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "FastAPI APIRouter instance for MABOS endpoints",
+      "line_start": 9,
+      "line_end": 9
+    },
+    {
+      "id": "mabos_router.py:create_agent",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "create_agent",
+      "kind": "function",
+      "scope": "module",
+      "signature": "create_agent(agent_id: str, beliefs: dict, desires: List[dict], intentions: List[dict], ontology: dict)",
+      "line_start": 11,
+      "line_end": 22
+    },
+    {
+      "id": "mabos_router.py:get_agent",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "get_agent",
+      "kind": "function",
+      "scope": "module",
+      "signature": "get_agent(agent_id: str)",
+      "line_start": 24,
+      "line_end": 40
+    },
+    {
+      "id": "mabos_router.py:update_agent_beliefs",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "update_agent_beliefs",
+      "kind": "function",
+      "scope": "module",
+      "signature": "update_agent_beliefs(agent_id: str, beliefs: dict)",
+      "line_start": 42,
+      "line_end": 49
+    },
+    {
+      "id": "mabos_router.py:add_agent_goal",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "add_agent_goal",
+      "kind": "function",
+      "scope": "module",
+      "signature": "add_agent_goal(agent_id: str, goal: Goal)",
+      "line_start": 51,
+      "line_end": 60
+    },
+    {
+      "id": "mabos_router.py:add_agent_plan",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "add_agent_plan",
+      "kind": "function",
+      "scope": "module",
+      "signature": "add_agent_plan(agent_id: str, plan: Plan)",
+      "line_start": 62,
+      "line_end": 71
+    },
+    {
+      "id": "mabos_router.py:remove_agent_plan",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "remove_agent_plan",
+      "kind": "function",
+      "scope": "module",
+      "signature": "remove_agent_plan(agent_id: str, plan_id: str)",
+      "line_start": 73,
+      "line_end": 84
+    },
+    {
+      "id": "mabos_router.py:Agent",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "Agent",
+      "kind": "import",
+      "scope": "module",
+      "signature": "Agent from ..mabos.agents.agent",
+      "line_start": 3,
+      "line_end": 3
+    },
+    {
+      "id": "mabos_router.py:Goal",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "Goal",
+      "kind": "import",
+      "scope": "module",
+      "signature": "Goal from ..mabos.goal_management.goal",
+      "line_start": 4,
+      "line_end": 4
+    },
+    {
+      "id": "mabos_router.py:Plan",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "Plan",
+      "kind": "import",
+      "scope": "module",
+      "signature": "Plan from ..mabos.planning.plan",
+      "line_start": 5,
+      "line_end": 5
+    },
+    {
+      "id": "mabos_router.py:Action",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "Action",
+      "kind": "import",
+      "scope": "module",
+      "signature": "Action from ..mabos.task_management.action",
+      "line_start": 6,
+      "line_end": 6
+    },
+    {
+      "id": "mabos_router.py:KnowledgeBase",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "KnowledgeBase",
+      "kind": "import",
+      "scope": "module",
+      "signature": "KnowledgeBase from ..mabos.knowledge_base",
+      "line_start": 7,
+      "line_end": 7
+    },
+    {
+      "id": "mabos_router.py:Ontology",
+      "path": "dify_mabos/api/mabos_router.py",
+      "name": "Ontology",
+      "kind": "import",
+      "scope": "module",
+      "signature": "Ontology from ..mabos.knowledge_management.ontology.ontology",
+      "line_start": 8,
+      "line_end": 8
+    },
+    {
+      "id": "mabos/agents/Agent",
+      "path": "dify_mabos/mabos/agents/agent.py",
+      "name": "Agent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "BDI Agent implementation with beliefs, desires, intentions",
+      "line_start": 1,
+      "line_end": 50
+    },
+    {
+      "id": "mabos/goal_management/Goal",
+      "path": "dify_mabos/mabos/goal_management/goal.py",
+      "name": "Goal",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Goal management class for agent desires",
+      "line_start": 1,
+      "line_end": 30
+    },
+    {
+      "id": "mabos/planning/Plan",
+      "path": "dify_mabos/mabos/planning/plan.py",
+      "name": "Plan",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Planning system for agent intentions",
+      "line_start": 1,
+      "line_end": 40
+    },
+    {
+      "id": "mabos/knowledge_management/KnowledgeBase",
+      "path": "dify_mabos/mabos/knowledge_base.py",
+      "name": "KnowledgeBase",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Knowledge management system with ontology support",
+      "line_start": 1,
+      "line_end": 60
+    },
+    {
+      "id": "mabos/knowledge_management/Ontology",
+      "path": "dify_mabos/mabos/knowledge_management/ontology/ontology.py",
+      "name": "Ontology",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Ontology management using Owlready2",
+      "line_start": 1,
+      "line_end": 80
+    },
+    {
+      "id": "api/app.py:app",
+      "path": "dify_mabos/api/app.py",
+      "name": "app",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "Flask application instance",
+      "line_start": 1,
+      "line_end": 272
+    },
+    {
+      "id": "web/package.json:dify-web",
+      "path": "dify_mabos/web/package.json",
+      "name": "dify-web",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Next.js web application for MABOS frontend",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "sdks/python-client:dify_client",
+      "path": "dify_mabos/sdks/python-client/dify_client/__init__.py",
+      "name": "dify_client",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Python SDK for Dify MABOS integration",
+      "line_start": 1,
+      "line_end": 20
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "mabos_router.py:create_agent",
+      "to_id": "mabos_router.py:Agent",
+      "type": "instantiates",
+      "line_number": 20
+    },
+    {
+      "from_id": "mabos_router.py:create_agent",
+      "to_id": "mabos_router.py:Ontology",
+      "type": "instantiates",
+      "line_number": 14
+    },
+    {
+      "from_id": "mabos_router.py:create_agent",
+      "to_id": "mabos_router.py:KnowledgeBase",
+      "type": "instantiates",
+      "line_number": 15
+    },
+    {
+      "from_id": "mabos_router.py:create_agent",
+      "to_id": "mabos_router.py:Goal",
+      "type": "instantiates",
+      "line_number": 18
+    },
+    {
+      "from_id": "mabos_router.py:create_agent",
+      "to_id": "mabos_router.py:Plan",
+      "type": "instantiates",
+      "line_number": 19
+    },
+    {
+      "from_id": "mabos_router.py:get_agent",
+      "to_id": "mabos/agents/Agent",
+      "type": "calls",
+      "line_number": 25
+    },
+    {
+      "from_id": "mabos_router.py:update_agent_beliefs",
+      "to_id": "mabos/agents/Agent",
+      "type": "calls",
+      "line_number": 43
+    },
+    {
+      "from_id": "mabos_router.py:add_agent_goal",
+      "to_id": "mabos/goal_management/Goal",
+      "type": "instantiates",
+      "line_number": 56
+    },
+    {
+      "from_id": "mabos_router.py:add_agent_plan",
+      "to_id": "mabos/planning/Plan",
+      "type": "instantiates",
+      "line_number": 66
+    },
+    {
+      "from_id": "mabos/agents/Agent",
+      "to_id": "mabos/knowledge_management/KnowledgeBase",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "mabos/knowledge_management/KnowledgeBase",
+      "to_id": "mabos/knowledge_management/Ontology",
+      "type": "uses_imported_symbol",
+      "line_number": 5
+    },
+    {
+      "from_id": "api/app.py:app",
+      "to_id": "mabos_router.py:router",
+      "type": "imports_symbol",
+      "line_number": 50
+    },
+    {
+      "from_id": "mabos_router.py:router",
+      "to_id": "mabos_router.py:create_agent",
+      "type": "defines_route_for",
+      "line_number": 11
+    },
+    {
+      "from_id": "mabos_router.py:router",
+      "to_id": "mabos_router.py:get_agent",
+      "type": "defines_route_for",
+      "line_number": 24
+    },
+    {
+      "from_id": "mabos_router.py:router",
+      "to_id": "mabos_router.py:update_agent_beliefs",
+      "type": "defines_route_for",
+      "line_number": 42
+    }
+  ]
+} 

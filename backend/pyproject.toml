@@ -1,0 +1,287 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mabos-backend"
+version = "1.0.0"
+description = "Multi-Agent Business Operating System Backend - FastAPI with BDI architecture"
+authors = [
+    {name = "MABOS Development Team", email = "dev@mabos.ai"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: FastAPI",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+
+[project.urls]
+Homepage = "https://github.com/mabos/mabos-workbench"
+Documentation = "https://docs.mabos.ai"
+Repository = "https://github.com/mabos/mabos-workbench.git"
+"Bug Tracker" = "https://github.com/mabos/mabos-workbench/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+# ===== Code Formatting (Black) =====
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  migrations/
+  | __pycache__/
+  | .git/
+  | .venv/
+  | build/
+  | dist/
+)/
+'''
+
+# ===== Import Sorting (isort) =====
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["app"]
+known_third_party = ["fastapi", "sqlalchemy", "redis", "neo4j", "owlready2"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+# ===== Type Checking (mypy) =====
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+namespace_packages = true
+strict_optional = true
+warn_unreachable = true
+disallow_any_generics = true
+disallow_untyped_calls = true
+
+exclude = [
+    "migrations/",
+    "build/",
+    "dist/",
+    "__pycache__/",
+    ".venv/",
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "owlready2.*",
+    "neo4j.*",
+    "playwright.*",
+    "celery.*",
+    "pyrfc.*",
+    "simple_salesforce.*",
+    "pysnow.*",
+    "msgraph_core.*",
+    "oracledb.*"
+]
+ignore_missing_imports = true
+
+# ===== Testing Framework (pytest - Task 24 Requirements) =====
+[tool.pytest.ini_options]
+# Test discovery
+testpaths = ["app/tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+# Test execution options
+addopts = [
+    # Coverage options (Task 24: 90%+ coverage requirement)
+    "--cov=app",
+    "--cov-report=html:htmlcov",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-report=json",
+    
+    # Coverage thresholds (Task 24: Minimum 90% coverage)
+    "--cov-fail-under=90",
+    
+    # Test execution options
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    
+    # Performance and parallel execution
+    "--maxfail=5",
+    "--tb=short",
+    "-x",  # Stop on first failure in CI
+    
+    # Warnings
+    "--disable-warnings",
+    "--show-capture=no",
+    
+    # Test result formatting
+    "--junit-xml=test-results/pytest/results.xml",
+    "--html=test-results/pytest/report.html",
+    "--self-contained-html",
+]
+
+# Test markers (Task 24: Different test categories)
+markers = [
+    "unit: Unit tests that test individual components in isolation",
+    "integration: Integration tests that test component interactions",
+    "e2e: End-to-end tests that test complete workflows",
+    "security: Security tests including vulnerability assessments",
+    "performance: Performance and load tests",
+    "slow: Tests that take longer than 5 seconds to run",
+    "external: Tests that require external services",
+    "database: Tests that require database access",
+    "redis: Tests that require Redis access",
+    "neo4j: Tests that require Neo4j access",
+    "elasticsearch: Tests that require Elasticsearch access",
+    "llm: Tests that require LLM provider access",
+    "enterprise: Tests for enterprise system integrations",
+    "auth: Authentication and authorization tests",
+    "api: API endpoint tests",
+    "workflow: Workflow engine tests",
+    "bdi: BDI agent framework tests",
+]
+
+# Test filtering
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::pytest.PytestUnraisableExceptionWarning",
+]
+
+# Environment variables for testing
+env = [
+    "TESTING=true",
+    "DATABASE_URL=postgresql://test_user:test_pass@localhost:5432/test_db",
+    "REDIS_URL=redis://localhost:6379/15",
+    "NEO4J_URI=bolt://localhost:7687",
+    "ELASTICSEARCH_URL=http://localhost:9200",
+    "DEBUG=false",
+    "LOG_LEVEL=WARNING",
+]
+
+# Test timeout
+timeout = 300
+
+# Parallel execution
+asyncio_mode = "auto"
+trio_mode = true
+
+# ===== Coverage Configuration =====
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/build/*",
+    "*/dist/*",
+    "*/conftest.py",
+    "*/test_*.py",
+    "*/*_test.py",
+]
+
+# Branch coverage
+branch = true
+
+# Concurrency support
+concurrency = ["thread", "multiprocessing"]
+
+[tool.coverage.report]
+# Coverage reporting options
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+    "pass",
+    "\\.\\.\\.",
+]
+
+# Coverage thresholds (Task 24: 90%+ coverage)
+fail_under = 90
+precision = 2
+show_missing = true
+skip_covered = false
+sort = "Cover"
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.coverage.json]
+output = "coverage.json"
+
+# ===== Security Scanning (Bandit) =====
+[tool.bandit]
+exclude_dirs = ["tests", "migrations", ".venv", "venv", "build", "dist"]
+skips = ["B101", "B601"]  # Skip assert_used and shell_injection_possible
+severity = "medium"
+
+# ===== Linting (Flake8) =====
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "migrations",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "*.egg-info",
+]
+max-complexity = 10
+statistics = true
+count = true
+
+# Per-file ignores
+per-file-ignores = [
+    "__init__.py:F401",
+    "*/tests/*:S101,F811",
+    "conftest.py:F811",
+]
+
+# ===== Performance Profiling =====
+[tool.py-spy]
+duration = 60
+rate = 100
+subprocesses = true
+
+# ===== Documentation (Sphinx) =====
+[tool.sphinx]
+source-dir = "docs"
+build-dir = "docs/_build"
+
+# ===== Development Dependencies =====
+[tool.pip-tools]
+generate-hashes = true
+allow-unsafe = true 

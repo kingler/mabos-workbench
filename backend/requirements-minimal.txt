@@ -1,0 +1,30 @@
+# MABOS Minimal Requirements - Most essential packages only
+# This is the absolute minimum to get the core backend running
+
+# ===== Core Framework =====
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+# ===== Data Validation =====
+pydantic==2.6.0
+pydantic-settings==2.1.0
+
+# ===== Basic Authentication =====
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.9
+
+# ===== Environment =====
+python-dotenv==1.0.1
+
+# ===== Database (Basic) =====
+sqlalchemy==2.0.27
+alembic==1.13.1
+
+# ===== Testing =====
+pytest==8.0.2
+pytest-asyncio==0.23.5
+
+# ===== Code Quality =====
+black==24.2.0
+isort==5.13.2 

@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.1",
+  "analysis_metadata": {
+    "language": "Python",
+    "total_lines_analyzed": 14580,
+    "analysis_timestamp": "2025-01-25T18:45:30Z"
+  },
+  "file_structure": {
+    "mabos-standalone": { "type": "directory", "children": [
+      "app", "tests", "research-papers", ".vscode", ".git", "README.md", "requirements.txt", "main.py", ".gitignore"
+    ]},
+    "mabos-standalone/app": { "type": "directory", "children": [
+      "core", "models", "routers", "services", "db", "integration", "main.py.md", "dependencies.py", "exceptions.py", "__pycache__"
+    ]},
+    "mabos-standalone/app/core": { "type": "directory", "children": [
+      "ontologies", "meta_mas", "mas_agents", "mdd_mas", "world_model.py", "reasoning_engine.py", 
+      "ontology.py", "knowledge_graph.py", "llm_decomposer.py", "sentence_transformer.py",
+      "temporal_reasoning.py", "reasoner.py", "config.py", "__init__.py", "__pycache__"
+    ]},
+    "mabos-standalone/app/models": { "type": "directory", "children": [
+      "agent.py", "knowledge_representation.py", "multi_model_view.py", "mas_modeling_tool.py", "onboarding_agent.py",
+      "proactive_agent.py", "reactive_agent.py", "environmental_agent.py", "business_plan_agent.py",
+      "belief.py", "desire.py", "intention.py", "goal.py", "plan.py", "action.py", "task.py",
+      "knowledge_base.py", "message.py", "multiagent_system.py", "environment.py", "organization.py",
+      "business_model.py", "business_process_manager.py", "erp_models.py", "communication_ontology.py",
+      "plan_library.py", "htn_planner.py", "symbolic_planner.py", "rules_engine.py", "__init__.py", "__pycache__"
+    ]},
+    "mabos-standalone/app/routers": { "type": "directory", "children": [
+      "agents.py", "beliefs.py", "desires.py", "intentions.py", "goals.py", "plans.py", "actions.py",
+      "knowledge_bases.py", "communication.py", "ontology.py", "business_models.py", "erp_router.py",
+      "organization.py", "mas_modeling.py", "mdd_mas.py", "togaf_mdd.py", "tropos_mdd.py",
+      "environment.py", "world_model_router.py", "tasks.py", "version_control.py", "__init__.py", "__pycache__"
+    ]},
+    "mabos-standalone/app/services": { "type": "directory", "children": [] },
+    "mabos-standalone/README.md": { "type": "file" }
+  },
+  "entities": [
+    {
+      "id": "models/agent.py:Agent",
+      "path": "mabos-standalone/app/models/agent.py",
+      "name": "Agent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Core BDI agent implementation with beliefs, desires, intentions (822 lines)",
+      "line_start": 1,
+      "line_end": 822
+    },
+    {
+      "id": "models/knowledge_representation.py:KnowledgeRepresentation",
+      "path": "mabos-standalone/app/models/knowledge_representation.py",
+      "name": "KnowledgeRepresentation",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Comprehensive knowledge representation framework (698 lines)",
+      "line_start": 1,
+      "line_end": 698
+    },
+    {
+      "id": "models/proactive_agent.py:ProactiveAgent",
+      "path": "mabos-standalone/app/models/proactive_agent.py",
+      "name": "ProactiveAgent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Proactive agent for strategic planning and initiative (285 lines)",
+      "line_start": 1,
+      "line_end": 285
+    },
+    {
+      "id": "models/reactive_agent.py:ReactiveAgent",
+      "path": "mabos-standalone/app/models/reactive_agent.py",
+      "name": "ReactiveAgent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Reactive agent for event-driven responses (94 lines)",
+      "line_start": 1,
+      "line_end": 94
+    },
+    {
+      "id": "models/environmental_agent.py:EnvironmentalAgent",
+      "path": "mabos-standalone/app/models/environmental_agent.py",
+      "name": "EnvironmentalAgent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Environmental agent for system monitoring and context (57 lines)",
+      "line_start": 1,
+      "line_end": 57
+    },
+    {
+      "id": "core/reasoning_engine.py:ReasoningEngine",
+      "path": "mabos-standalone/app/core/reasoning_engine.py",
+      "name": "ReasoningEngine",
+      "kind": "class",
+      "scope": "module",
+      "signature": "AI reasoning engine for logical inference (232 lines)",
+      "line_start": 1,
+      "line_end": 232
+    },
+    {
+      "id": "core/world_model.py:WorldModel",
+      "path": "mabos-standalone/app/core/world_model.py",
+      "name": "WorldModel",
+      "kind": "class",
+      "scope": "module",
+      "signature": "World state representation and management (154 lines)",
+      "line_start": 1,
+      "line_end": 154
+    },
+    {
+      "id": "core/ontology.py:Ontology",
+      "path": "mabos-standalone/app/core/ontology.py",
+      "name": "Ontology",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Ontology management and semantic reasoning (210 lines)",
+      "line_start": 1,
+      "line_end": 210
+    },
+    {
+      "id": "models/knowledge_base.py:KnowledgeBase",
+      "path": "mabos-standalone/app/models/knowledge_base.py",
+      "name": "KnowledgeBase",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Knowledge storage and retrieval system (231 lines)",
+      "line_start": 1,
+      "line_end": 231
+    },
+    {
+      "id": "models/multiagent_system.py:MultiAgentSystem",
+      "path": "mabos-standalone/app/models/multiagent_system.py",
+      "name": "MultiAgentSystem",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Overall multi-agent system coordination (79 lines)",
+      "line_start": 1,
+      "line_end": 79
+    },
+    {
+      "id": "models/belief.py:Belief",
+      "path": "mabos-standalone/app/models/belief.py",
+      "name": "Belief",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Agent belief representation and management (33 lines)",
+      "line_start": 1,
+      "line_end": 33
+    },
+    {
+      "id": "models/desire.py:Desire",
+      "path": "mabos-standalone/app/models/desire.py",
+      "name": "Desire",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Agent desire and goal representation (48 lines)",
+      "line_start": 1,
+      "line_end": 48
+    },
+    {
+      "id": "models/intention.py:Intention",
+      "path": "mabos-standalone/app/models/intention.py",
+      "name": "Intention",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Agent intention and commitment management (114 lines)",
+      "line_start": 1,
+      "line_end": 114
+    },
+    {
+      "id": "models/goal.py:Goal",
+      "path": "mabos-standalone/app/models/goal.py",
+      "name": "Goal",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Goal definition and achievement tracking (106 lines)",
+      "line_start": 1,
+      "line_end": 106
+    },
+    {
+      "id": "models/plan.py:Plan",
+      "path": "mabos-standalone/app/models/plan.py",
+      "name": "Plan",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Planning system for goal achievement (100 lines)",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "models/action.py:Action",
+      "path": "mabos-standalone/app/models/action.py",
+      "name": "Action",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Action execution and monitoring (64 lines)",
+      "line_start": 1,
+      "line_end": 64
+    },
+    {
+      "id": "models/message.py:Message",
+      "path": "mabos-standalone/app/models/message.py",
+      "name": "Message",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Inter-agent communication message protocol (143 lines)",
+      "line_start": 1,
+      "line_end": 143
+    },
+    {
+      "id": "routers/agents.py:router",
+      "path": "mabos-standalone/app/routers/agents.py",
+      "name": "router",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "FastAPI router for agent management endpoints",
+      "line_start": 5,
+      "line_end": 5
+    },
+    {
+      "id": "routers/mas_modeling.py:router",
+      "path": "mabos-standalone/app/routers/mas_modeling.py",
+      "name": "router",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "FastAPI router for MAS modeling endpoints",
+      "line_start": 5,
+      "line_end": 5
+    },
+    {
+      "id": "routers/togaf_mdd.py:router",
+      "path": "mabos-standalone/app/routers/togaf_mdd.py",
+      "name": "router",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "FastAPI router for TOGAF integration endpoints",
+      "line_start": 5,
+      "line_end": 5
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "models/agent.py:Agent",
+      "to_id": "models/belief.py:Belief",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    },
+    {
+      "from_id": "models/agent.py:Agent",
+      "to_id": "models/desire.py:Desire",
+      "type": "uses_imported_symbol",
+      "line_number": 16
+    },
+    {
+      "from_id": "models/agent.py:Agent",
+      "to_id": "models/intention.py:Intention",
+      "type": "uses_imported_symbol",
+      "line_number": 17
+    },
+    {
+      "from_id": "models/proactive_agent.py:ProactiveAgent",
+      "to_id": "models/agent.py:Agent",
+      "type": "inherits",
+      "line_number": 10
+    },
+    {
+      "from_id": "models/reactive_agent.py:ReactiveAgent",
+      "to_id": "models/agent.py:Agent",
+      "type": "inherits",
+      "line_number": 8
+    },
+    {
+      "from_id": "models/environmental_agent.py:EnvironmentalAgent",
+      "to_id": "models/agent.py:Agent",
+      "type": "inherits",
+      "line_number": 8
+    },
+    {
+      "from_id": "models/multiagent_system.py:MultiAgentSystem",
+      "to_id": "models/agent.py:Agent",
+      "type": "uses_imported_symbol",
+      "line_number": 12
+    },
+    {
+      "from_id": "models/agent.py:Agent",
+      "to_id": "models/knowledge_base.py:KnowledgeBase",
+      "type": "uses_imported_symbol",
+      "line_number": 20
+    },
+    {
+      "from_id": "models/agent.py:Agent",
+      "to_id": "core/reasoning_engine.py:ReasoningEngine",
+      "type": "uses_imported_symbol",
+      "line_number": 25
+    },
+    {
+      "from_id": "core/reasoning_engine.py:ReasoningEngine",
+      "to_id": "core/ontology.py:Ontology",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "models/knowledge_base.py:KnowledgeBase",
+      "to_id": "models/knowledge_representation.py:KnowledgeRepresentation",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    },
+    {
+      "from_id": "models/plan.py:Plan",
+      "to_id": "models/action.py:Action",
+      "type": "uses_imported_symbol",
+      "line_number": 12
+    },
+    {
+      "from_id": "models/intention.py:Intention",
+      "to_id": "models/plan.py:Plan",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "models/desire.py:Desire",
+      "to_id": "models/goal.py:Goal",
+      "type": "uses_imported_symbol",
+      "line_number": 8
+    },
+    {
+      "from_id": "routers/agents.py:router",
+      "to_id": "models/agent.py:Agent",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    }
+  ]
+} 

@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.1",
+  "analysis_metadata": {
+    "language": "Java",
+    "total_lines_analyzed": 187652,
+    "analysis_timestamp": "2025-01-25T18:35:12Z"
+  },
+  "file_structure": {
+    "kestra-kb": { "type": "directory", "children": [
+      "core", "webserver", "ui", "cli", "jdbc", "jdbc-h2", "jdbc-mysql", "jdbc-postgres", 
+      "runner-memory", "storage-local", "repository-memory", "processor", "model", "script", "tests", "platform",
+      "e2e-tests", "gradle", "docker", ".github", "build.gradle", "settings.gradle", "README.md", "LICENSE"
+    ]},
+    "kestra-kb/core": { "type": "directory", "children": [
+      "src", "build.gradle"
+    ]},
+    "kestra-kb/core/src/main/java": { "type": "directory", "children": [
+      "io"
+    ]},
+    "kestra-kb/core/src/main/java/io/kestra/core": { "type": "directory", "children": [
+      "models", "runners", "schedulers", "queues", "repositories", "plugins", "storages", "services", 
+      "events", "endpoints", "server", "topologies", "metrics", "encryption", "validations", "utils",
+      "tenant", "serializers", "secret", "listeners", "http", "exceptions", "docs", "converters", "contexts", "annotations", "app"
+    ]},
+    "kestra-kb/core/src/main/java/io/kestra/core/models": { "type": "directory", "children": [
+      "flows", "executions", "tasks", "triggers", "templates", "namespaces", "topologies", "storage",
+      "dashboards", "conditions", "validations", "hierarchies", "property", "stats", "kv", "listeners", "collectors",
+      "Setting.java", "TenantInterface.java", "WorkerJobLifecycle.java", "DeletedInterface.java", "HasUID.java", "Label.java", "Pauseable.java", "SearchResult.java", "ServerType.java"
+    ]},
+    "kestra-kb/webserver": { "type": "directory", "children": [
+      "src", "build.gradle"
+    ]},
+    "kestra-kb/ui": { "type": "directory", "children": [
+      "src", "public", "scripts", "tests", "theme", "plugins", ".storybook", ".husky", "package.json", "vite.config.js"
+    ]},
+    "kestra-kb/jdbc-h2": { "type": "directory", "children": [
+      "src", "build.gradle"
+    ]},
+    "kestra-kb/jdbc-mysql": { "type": "directory", "children": [
+      "src", "build.gradle"
+    ]},
+    "kestra-kb/jdbc-postgres": { "type": "directory", "children": [
+      "src", "build.gradle"
+    ]},
+    "kestra-kb/README.md": { "type": "file" }
+  },
+  "entities": [
+    {
+      "id": "core/models/flows/Flow",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/models/flows/Flow.java",
+      "name": "Flow",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Core workflow definition class",
+      "line_start": 1,
+      "line_end": 200
+    },
+    {
+      "id": "core/models/executions/Execution",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/models/executions/Execution.java",
+      "name": "Execution",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Workflow execution state and data",
+      "line_start": 1,
+      "line_end": 180
+    },
+    {
+      "id": "core/models/tasks/Task",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/models/tasks/Task.java",
+      "name": "Task",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Base task interface for all workflow tasks",
+      "line_start": 1,
+      "line_end": 80
+    },
+    {
+      "id": "core/models/triggers/Trigger",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/models/triggers/Trigger.java",
+      "name": "Trigger",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Base trigger interface for workflow triggers",
+      "line_start": 1,
+      "line_end": 60
+    },
+    {
+      "id": "core/runners/FlowExecutor",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/runners/FlowExecutor.java",
+      "name": "FlowExecutor",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Main workflow execution engine",
+      "line_start": 1,
+      "line_end": 300
+    },
+    {
+      "id": "core/runners/RunContext",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/runners/RunContext.java",
+      "name": "RunContext",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Task execution context with utilities and services",
+      "line_start": 1,
+      "line_end": 250
+    },
+    {
+      "id": "core/schedulers/Scheduler",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/schedulers/Scheduler.java",
+      "name": "Scheduler",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Workflow scheduling interface",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "core/repositories/FlowRepositoryInterface",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/repositories/FlowRepositoryInterface.java",
+      "name": "FlowRepositoryInterface",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Flow data access interface",
+      "line_start": 1,
+      "line_end": 120
+    },
+    {
+      "id": "core/repositories/ExecutionRepositoryInterface",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/repositories/ExecutionRepositoryInterface.java",
+      "name": "ExecutionRepositoryInterface",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Execution data access interface",
+      "line_start": 1,
+      "line_end": 150
+    },
+    {
+      "id": "core/plugins/PluginRegistry",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/plugins/PluginRegistry.java",
+      "name": "PluginRegistry",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Plugin registration and management system",
+      "line_start": 1,
+      "line_end": 200
+    },
+    {
+      "id": "core/storages/StorageInterface",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/storages/StorageInterface.java",
+      "name": "StorageInterface",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Storage abstraction interface",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "core/services/FlowService",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/services/FlowService.java",
+      "name": "FlowService",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Flow management business logic",
+      "line_start": 1,
+      "line_end": 400
+    },
+    {
+      "id": "core/queues/QueueInterface",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/queues/QueueInterface.java",
+      "name": "QueueInterface",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Message queue interface for workflow coordination",
+      "line_start": 1,
+      "line_end": 80
+    },
+    {
+      "id": "core/events/CrudEvent",
+      "path": "kestra-kb/core/src/main/java/io/kestra/core/events/CrudEvent.java",
+      "name": "CrudEvent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Base event for CRUD operations",
+      "line_start": 1,
+      "line_end": 60
+    },
+    {
+      "id": "webserver/Application",
+      "path": "kestra-kb/webserver/src/main/java/io/kestra/webserver/Application.java",
+      "name": "Application",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Main web server application class",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "ui/package.json:kestra-ui",
+      "path": "kestra-kb/ui/package.json",
+      "name": "kestra-ui",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Vue.js frontend application package",
+      "line_start": 1,
+      "line_end": 150
+    },
+    {
+      "id": "jdbc-h2/H2Repository",
+      "path": "kestra-kb/jdbc-h2/src/main/java/io/kestra/repository/h2/H2Repository.java",
+      "name": "H2Repository",
+      "kind": "class",
+      "scope": "module",
+      "signature": "H2 database repository implementation",
+      "line_start": 1,
+      "line_end": 200
+    },
+    {
+      "id": "jdbc-postgres/PostgresRepository",
+      "path": "kestra-kb/jdbc-postgres/src/main/java/io/kestra/repository/postgres/PostgresRepository.java",
+      "name": "PostgresRepository",
+      "kind": "class",
+      "scope": "module",
+      "signature": "PostgreSQL database repository implementation",
+      "line_start": 1,
+      "line_end": 200
+    },
+    {
+      "id": "jdbc-mysql/MySqlRepository",
+      "path": "kestra-kb/jdbc-mysql/src/main/java/io/kestra/repository/mysql/MySqlRepository.java",
+      "name": "MySqlRepository",
+      "kind": "class",
+      "scope": "module",
+      "signature": "MySQL database repository implementation",
+      "line_start": 1,
+      "line_end": 200
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "core/runners/FlowExecutor",
+      "to_id": "core/models/flows/Flow",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    },
+    {
+      "from_id": "core/runners/FlowExecutor",
+      "to_id": "core/models/executions/Execution",
+      "type": "instantiates",
+      "line_number": 50
+    },
+    {
+      "from_id": "core/runners/FlowExecutor",
+      "to_id": "core/runners/RunContext",
+      "type": "instantiates",
+      "line_number": 75
+    },
+    {
+      "from_id": "core/runners/RunContext",
+      "to_id": "core/storages/StorageInterface",
+      "type": "uses_imported_symbol",
+      "line_number": 20
+    },
+    {
+      "from_id": "core/services/FlowService",
+      "to_id": "core/repositories/FlowRepositoryInterface",
+      "type": "uses_imported_symbol",
+      "line_number": 25
+    },
+    {
+      "from_id": "core/services/FlowService",
+      "to_id": "core/models/flows/Flow",
+      "type": "returns_data_to",
+      "line_number": 100
+    },
+    {
+      "from_id": "core/plugins/PluginRegistry",
+      "to_id": "core/models/tasks/Task",
+      "type": "uses_imported_symbol",
+      "line_number": 30
+    },
+    {
+      "from_id": "jdbc-h2/H2Repository",
+      "to_id": "core/repositories/FlowRepositoryInterface",
+      "type": "implements",
+      "line_number": 10
+    },
+    {
+      "from_id": "jdbc-postgres/PostgresRepository",
+      "to_id": "core/repositories/FlowRepositoryInterface",
+      "type": "implements",
+      "line_number": 10
+    },
+    {
+      "from_id": "jdbc-mysql/MySqlRepository",
+      "to_id": "core/repositories/FlowRepositoryInterface",
+      "type": "implements",
+      "line_number": 10
+    },
+    {
+      "from_id": "webserver/Application",
+      "to_id": "core/services/FlowService",
+      "type": "uses_imported_symbol",
+      "line_number": 40
+    },
+    {
+      "from_id": "core/models/flows/Flow",
+      "to_id": "core/models/tasks/Task",
+      "type": "uses_imported_symbol",
+      "line_number": 45
+    },
+    {
+      "from_id": "core/models/flows/Flow",
+      "to_id": "core/models/triggers/Trigger",
+      "type": "uses_imported_symbol",
+      "line_number": 50
+    },
+    {
+      "from_id": "core/models/executions/Execution",
+      "to_id": "core/models/flows/Flow",
+      "type": "uses_imported_symbol",
+      "line_number": 20
+    },
+    {
+      "from_id": "core/schedulers/Scheduler",
+      "to_id": "core/models/triggers/Trigger",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    }
+  ]
+} 

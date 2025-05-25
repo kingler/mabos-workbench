@@ -1,0 +1,297 @@
+{
+  "schema_version": "1.1",
+  "analysis_metadata": {
+    "language": "TypeScript/Python",
+    "total_lines_analyzed": 8750,
+    "analysis_timestamp": "2025-01-25T19:00:15Z"
+  },
+  "file_structure": {
+    "suna": { "type": "directory", "children": [
+      "backend", "frontend", "docs", ".github", "README.md", "LICENSE", "docker-compose.yml", "docker-compose.ghcr.yaml"
+    ]},
+    "suna/backend": { "type": "directory", "children": [
+      "agent", "services", "sandbox", "supabase", "agentpress", "utils", 
+      "api.py", "requirements.txt", "pyproject.toml", "poetry.lock", "Dockerfile", "README.md", ".gitignore"
+    ]},
+    "suna/backend/agent": { "type": "directory", "children": [
+      "tools", "api.py", "prompt.py", "run.py", "__init__.py"
+    ]},
+    "suna/backend/agent/tools": { "type": "directory", "children": [
+      "data_providers", "sb_browser_tool.py", "computer_use_tool.py", "sb_files_tool.py", 
+      "web_search_tool.py", "message_tool.py", "sb_shell_tool.py", "sb_vision_tool.py",
+      "sb_deploy_tool.py", "sb_expose_tool.py", "data_providers_tool.py", "__init__.py"
+    ]},
+    "suna/frontend": { "type": "directory", "children": [
+      "src", "public", "package.json", "package-lock.json", "tsconfig.json", "next.config.ts",
+      "tailwind.config.ts", "components.json", "postcss.config.mjs", "eslint.config.mjs", "Dockerfile", "README.md", ".gitignore"
+    ]},
+    "suna/frontend/src": { "type": "directory", "children": [
+      "app", "components", "hooks", "lib"
+    ]},
+    "suna/README.md": { "type": "file" }
+  },
+  "entities": [
+    {
+      "id": "backend/agent/api.py:SunaAgent",
+      "path": "suna/backend/agent/api.py",
+      "name": "SunaAgent",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Main AI agent API interface and orchestration (1001 lines)",
+      "line_start": 1,
+      "line_end": 1001
+    },
+    {
+      "id": "backend/agent/prompt.py:PromptManager",
+      "path": "suna/backend/agent/prompt.py",
+      "name": "PromptManager",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Prompt engineering and management system (591 lines)",
+      "line_start": 1,
+      "line_end": 591
+    },
+    {
+      "id": "backend/agent/run.py:AgentRunner",
+      "path": "suna/backend/agent/run.py",
+      "name": "AgentRunner",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Agent execution and workflow management (526 lines)",
+      "line_start": 1,
+      "line_end": 526
+    },
+    {
+      "id": "backend/agent/tools/sb_browser_tool.py:BrowserTool",
+      "path": "suna/backend/agent/tools/sb_browser_tool.py",
+      "name": "BrowserTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Browser automation using Playwright (898 lines)",
+      "line_start": 1,
+      "line_end": 898
+    },
+    {
+      "id": "backend/agent/tools/computer_use_tool.py:ComputerUseTool",
+      "path": "suna/backend/agent/tools/computer_use_tool.py",
+      "name": "ComputerUseTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Computer control and desktop automation (624 lines)",
+      "line_start": 1,
+      "line_end": 624
+    },
+    {
+      "id": "backend/agent/tools/sb_files_tool.py:FilesTool",
+      "path": "suna/backend/agent/tools/sb_files_tool.py",
+      "name": "FilesTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "File system operations and document management (433 lines)",
+      "line_start": 1,
+      "line_end": 433
+    },
+    {
+      "id": "backend/agent/tools/web_search_tool.py:WebSearchTool",
+      "path": "suna/backend/agent/tools/web_search_tool.py",
+      "name": "WebSearchTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Web search using Tavily and other search providers (329 lines)",
+      "line_start": 1,
+      "line_end": 329
+    },
+    {
+      "id": "backend/agent/tools/message_tool.py:MessageTool",
+      "path": "suna/backend/agent/tools/message_tool.py",
+      "name": "MessageTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Communication and messaging capabilities (289 lines)",
+      "line_start": 1,
+      "line_end": 289
+    },
+    {
+      "id": "backend/agent/tools/sb_shell_tool.py:ShellTool",
+      "path": "suna/backend/agent/tools/sb_shell_tool.py",
+      "name": "ShellTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Command-line execution in sandbox environment (212 lines)",
+      "line_start": 1,
+      "line_end": 212
+    },
+    {
+      "id": "backend/agent/tools/sb_deploy_tool.py:DeployTool",
+      "path": "suna/backend/agent/tools/sb_deploy_tool.py",
+      "name": "DeployTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Website and application deployment (143 lines)",
+      "line_start": 1,
+      "line_end": 143
+    },
+    {
+      "id": "backend/agent/tools/sb_vision_tool.py:VisionTool",
+      "path": "suna/backend/agent/tools/sb_vision_tool.py",
+      "name": "VisionTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Computer vision and image analysis (128 lines)",
+      "line_start": 1,
+      "line_end": 128
+    },
+    {
+      "id": "backend/agent/tools/data_providers_tool.py:DataProvidersTool",
+      "path": "suna/backend/agent/tools/data_providers_tool.py",
+      "name": "DataProvidersTool",
+      "kind": "class",
+      "scope": "module",
+      "signature": "Data provider integrations (LinkedIn, APIs) (173 lines)",
+      "line_start": 1,
+      "line_end": 173
+    },
+    {
+      "id": "backend/api.py:FastAPIApp",
+      "path": "suna/backend/api.py",
+      "name": "FastAPIApp",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "FastAPI application instance for backend API",
+      "line_start": 1,
+      "line_end": 161
+    },
+    {
+      "id": "frontend/package.json:suna-frontend",
+      "path": "suna/frontend/package.json",
+      "name": "suna-frontend",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Next.js frontend application package",
+      "line_start": 1,
+      "line_end": 106
+    },
+    {
+      "id": "frontend/src/app:NextJSApp",
+      "path": "suna/frontend/src/app",
+      "name": "NextJSApp",
+      "kind": "directory",
+      "scope": "module",
+      "signature": "Next.js App Router application structure",
+      "line_start": 1,
+      "line_end": 50
+    },
+    {
+      "id": "backend/supabase:Database",
+      "path": "suna/backend/supabase",
+      "name": "Database",
+      "kind": "directory",
+      "scope": "module",
+      "signature": "Supabase database migrations and functions",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "id": "backend/sandbox:SandboxEnvironment",
+      "path": "suna/backend/sandbox",
+      "name": "SandboxEnvironment",
+      "kind": "directory",
+      "scope": "module",
+      "signature": "Secure agent execution environment using Daytona",
+      "line_start": 1,
+      "line_end": 50
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "backend/agent/api.py:SunaAgent",
+      "to_id": "backend/agent/run.py:AgentRunner",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    },
+    {
+      "from_id": "backend/agent/api.py:SunaAgent",
+      "to_id": "backend/agent/prompt.py:PromptManager",
+      "type": "uses_imported_symbol",
+      "line_number": 20
+    },
+    {
+      "from_id": "backend/agent/run.py:AgentRunner",
+      "to_id": "backend/agent/tools/sb_browser_tool.py:BrowserTool",
+      "type": "instantiates",
+      "line_number": 50
+    },
+    {
+      "from_id": "backend/agent/run.py:AgentRunner",
+      "to_id": "backend/agent/tools/computer_use_tool.py:ComputerUseTool",
+      "type": "instantiates",
+      "line_number": 55
+    },
+    {
+      "from_id": "backend/agent/run.py:AgentRunner",
+      "to_id": "backend/agent/tools/sb_files_tool.py:FilesTool",
+      "type": "instantiates",
+      "line_number": 60
+    },
+    {
+      "from_id": "backend/agent/run.py:AgentRunner",
+      "to_id": "backend/agent/tools/web_search_tool.py:WebSearchTool",
+      "type": "instantiates",
+      "line_number": 65
+    },
+    {
+      "from_id": "backend/agent/run.py:AgentRunner",
+      "to_id": "backend/agent/tools/sb_shell_tool.py:ShellTool",
+      "type": "instantiates",
+      "line_number": 70
+    },
+    {
+      "from_id": "backend/agent/tools/sb_browser_tool.py:BrowserTool",
+      "to_id": "backend/sandbox:SandboxEnvironment",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "backend/agent/tools/sb_files_tool.py:FilesTool",
+      "to_id": "backend/sandbox:SandboxEnvironment",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "backend/agent/tools/sb_shell_tool.py:ShellTool",
+      "to_id": "backend/sandbox:SandboxEnvironment",
+      "type": "uses_imported_symbol",
+      "line_number": 10
+    },
+    {
+      "from_id": "backend/api.py:FastAPIApp",
+      "to_id": "backend/agent/api.py:SunaAgent",
+      "type": "imports_symbol",
+      "line_number": 25
+    },
+    {
+      "from_id": "frontend/src/app:NextJSApp",
+      "to_id": "backend/api.py:FastAPIApp",
+      "type": "calls",
+      "line_number": 30
+    },
+    {
+      "from_id": "backend/agent/api.py:SunaAgent",
+      "to_id": "backend/supabase:Database",
+      "type": "uses_imported_symbol",
+      "line_number": 30
+    },
+    {
+      "from_id": "backend/agent/tools/data_providers_tool.py:DataProvidersTool",
+      "to_id": "backend/agent/tools/web_search_tool.py:WebSearchTool",
+      "type": "uses_imported_symbol",
+      "line_number": 15
+    },
+    {
+      "from_id": "backend/agent/tools/message_tool.py:MessageTool",
+      "to_id": "backend/agent/tools/sb_files_tool.py:FilesTool",
+      "type": "uses_imported_symbol",
+      "line_number": 20
+    }
+  ]
+} 

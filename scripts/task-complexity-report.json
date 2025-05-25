@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "generatedAt": "2025-05-24T23:15:05.620Z",
+    "tasksAnalyzed": 25,
+    "thresholdScore": 6,
+    "projectName": "Your Project Name",
+    "usedResearch": true
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "Project Foundation & Architecture Setup",
+      "complexityScore": 8,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Project Foundation & Architecture Setup task into 5 specific subtasks covering monorepo structure, development environment setup, standards establishment, directory structure creation, and CI/CD pipeline initialization",
+      "reasoning": "Setting up a foundational architecture with microservices, containerization, and CI/CD involves multiple complex components requiring specialized knowledge and careful planning"
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "Database Architecture & Schema Implementation",
+      "complexityScore": 9,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Database Architecture & Schema Implementation task into 5 specific subtasks covering each database system (PostgreSQL, Neo4j, Redis, Elasticsearch) and database maintenance procedures",
+      "reasoning": "Implementing a multi-database architecture with four different database technologies requires deep expertise in each system and careful integration planning"
+    },
+    {
+      "taskId": 3,
+      "taskTitle": "BDI Agent Engine Core Implementation",
+      "complexityScore": 10,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the BDI Agent Engine Core Implementation task into 5 specific subtasks covering agent classes, planning algorithms, ontology management, coordination protocols, and meta-agent capabilities",
+      "reasoning": "The BDI architecture implementation involves complex AI concepts, ontology management, and coordination protocols requiring specialized knowledge and careful design"
+    },
+    {
+      "taskId": 4,
+      "taskTitle": "Workflow Orchestration Engine",
+      "complexityScore": 9,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Workflow Orchestration Engine task into 5 specific subtasks covering YAML parser development, task scheduling, workflow execution, monitoring implementation, and BDI agent integration",
+      "reasoning": "Building an enterprise-grade workflow engine with dynamic adaptation capabilities requires complex state management, scheduling logic, and integration with multiple systems"
+    },
+    {
+      "taskId": 5,
+      "taskTitle": "Secure Sandbox Execution Environment",
+      "complexityScore": 8,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Secure Sandbox Execution Environment task into 4 specific subtasks covering Docker isolation, resource monitoring, security scanning, and Kubernetes orchestration",
+      "reasoning": "Implementing a secure execution environment involves complex containerization, security considerations, and resource management requiring specialized DevOps knowledge"
+    },
+    {
+      "taskId": 6,
+      "taskTitle": "Authentication & Authorization System",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Authentication & Authorization System task into 4 specific subtasks covering JWT implementation, RBAC development, SSO integration, and multi-factor authentication",
+      "reasoning": "Enterprise-grade authentication systems require implementation of multiple security protocols and careful permission management with security best practices"
+    },
+    {
+      "taskId": 7,
+      "taskTitle": "LLM Gateway & Multi-Provider Integration",
+      "complexityScore": 8,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the LLM Gateway & Multi-Provider Integration task into 4 specific subtasks covering provider integration, intelligent routing, caching implementation, and monitoring/logging",
+      "reasoning": "Building an LLM gateway with multiple providers requires complex API integrations, routing logic, and performance optimization strategies"
+    },
+    {
+      "taskId": 8,
+      "taskTitle": "Conversational Workflow Builder",
+      "complexityScore": 9,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Conversational Workflow Builder task into 5 specific subtasks covering natural language processing, intent recognition, dialogue system development, clarification generation, and workflow visualization",
+      "reasoning": "Developing a natural language interface for workflow creation involves complex NLP, dialogue management, and integration with multiple system components"
+    },
+    {
+      "taskId": 9,
+      "taskTitle": "Visual Workflow Designer Frontend",
+      "complexityScore": 8,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Visual Workflow Designer Frontend task into 5 specific subtasks covering React/TypeScript canvas implementation, component library development, real-time collaboration features, version control, and validation engine",
+      "reasoning": "Creating a comprehensive workflow designer involves complex UI interactions, real-time collaboration features, and integration with backend workflow systems"
+    },
+    {
+      "taskId": 10,
+      "taskTitle": "Enterprise System Connectors - Tier 1",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Enterprise System Connectors - Tier 1 task into 4 specific subtasks covering SAP/Salesforce integrations, Microsoft/Oracle integrations, credential management, and synchronization implementation",
+      "reasoning": "Implementing connectors for major enterprise systems requires knowledge of multiple APIs, authentication mechanisms, and data synchronization strategies"
+    },
+    {
+      "taskId": 11,
+      "taskTitle": "Knowledge Management & Ontology System",
+      "complexityScore": 9,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Knowledge Management & Ontology System task into 4 specific subtasks covering Neo4j integration, ontology management, SPARQL interface development, and semantic understanding implementation",
+      "reasoning": "Building a comprehensive knowledge graph system involves complex semantic technologies, reasoning engines, and specialized graph database knowledge"
+    },
+    {
+      "taskId": 12,
+      "taskTitle": "Real-Time Analytics & Monitoring Dashboard",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Real-Time Analytics & Monitoring Dashboard task into 4 specific subtasks covering Elasticsearch implementation, dashboard development, trend analysis, and reporting functionality",
+      "reasoning": "Implementing analytics with real-time dashboards and predictive insights requires complex data processing, visualization techniques, and integration with multiple data sources"
+    },
+    {
+      "taskId": 13,
+      "taskTitle": "Mobile Progressive Web App",
+      "complexityScore": 6,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the Mobile Progressive Web App task into 3 specific subtasks covering responsive design implementation, offline functionality development, and push notification system",
+      "reasoning": "Developing a mobile PWA involves moderate complexity with responsive design, offline capabilities, and cross-platform considerations"
+    },
+    {
+      "taskId": 14,
+      "taskTitle": "Plugin SDK & Marketplace Framework",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Plugin SDK & Marketplace Framework task into 4 specific subtasks covering SDK development, plugin architecture implementation, marketplace creation, and documentation/testing framework",
+      "reasoning": "Creating an SDK and marketplace framework involves complex API design, security considerations, and ecosystem management strategies"
+    },
+    {
+      "taskId": 15,
+      "taskTitle": "API Gateway & Documentation",
+      "complexityScore": 6,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the API Gateway & Documentation task into 3 specific subtasks covering gateway implementation, documentation development, and developer portal creation",
+      "reasoning": "Implementing an API gateway with documentation involves moderate complexity with routing, rate limiting, and comprehensive documentation generation"
+    },
+    {
+      "taskId": 16,
+      "taskTitle": "Security Compliance & Audit System",
+      "complexityScore": 8,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Security Compliance & Audit System task into 4 specific subtasks covering monitoring implementation, audit logging, compliance reporting, and incident response automation",
+      "reasoning": "Building comprehensive security and compliance systems requires specialized security knowledge, regulatory understanding, and integration with multiple system components"
+    },
+    {
+      "taskId": 17,
+      "taskTitle": "Performance Optimization & Caching",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Performance Optimization & Caching task into 4 specific subtasks covering multi-level caching implementation, performance monitoring, query optimization, and auto-scaling mechanisms",
+      "reasoning": "Implementing comprehensive performance strategies involves complex caching mechanisms, monitoring systems, and optimization techniques across multiple system layers"
+    },
+    {
+      "taskId": 18,
+      "taskTitle": "Kubernetes Deployment & Orchestration",
+      "complexityScore": 8,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Kubernetes Deployment & Orchestration task into 4 specific subtasks covering deployment manifests, auto-scaling implementation, multi-region setup, and service mesh integration",
+      "reasoning": "Setting up production-ready Kubernetes requires specialized knowledge of container orchestration, networking, and distributed systems management"
+    },
+    {
+      "taskId": 19,
+      "taskTitle": "CI/CD Pipeline & DevOps Automation",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the CI/CD Pipeline & DevOps Automation task into 4 specific subtasks covering pipeline implementation, automated testing setup, security scanning integration, and infrastructure as code development",
+      "reasoning": "Implementing comprehensive CI/CD involves integration of multiple tools, testing frameworks, and deployment strategies requiring DevOps expertise"
+    },
+    {
+      "taskId": 20,
+      "taskTitle": "User Experience & Accessibility Implementation",
+      "complexityScore": 6,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the User Experience & Accessibility Implementation task into 3 specific subtasks covering design system implementation, accessibility compliance, and responsive design development",
+      "reasoning": "Implementing UX with accessibility compliance involves moderate complexity with design systems, WCAG guidelines, and responsive implementation across devices"
+    },
+    {
+      "taskId": 21,
+      "taskTitle": "Enterprise System Connectors - Tier 2",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Enterprise System Connectors - Tier 2 task into 4 specific subtasks covering ERP/CRM integrations, cloud platform connectors, communication tool integrations, and batch processing implementation",
+      "reasoning": "Expanding integration capabilities requires knowledge of multiple APIs, authentication mechanisms, and data synchronization strategies similar to Tier 1 connectors"
+    },
+    {
+      "taskId": 22,
+      "taskTitle": "Advanced AI/ML Integration",
+      "complexityScore": 9,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Advanced AI/ML Integration task into 4 specific subtasks covering predictive analytics implementation, ML model development, natural language querying, and pattern recognition systems",
+      "reasoning": "Implementing advanced AI/ML capabilities requires specialized knowledge in machine learning, predictive modeling, and integration with existing workflow systems"
+    },
+    {
+      "taskId": 23,
+      "taskTitle": "Global Localization & Internationalization",
+      "complexityScore": 5,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the Global Localization & Internationalization task into 3 specific subtasks covering internationalization framework implementation, language localization, and region-specific compliance features",
+      "reasoning": "Implementing multi-language support and regional adaptations involves moderate complexity with translation management and cultural considerations"
+    },
+    {
+      "taskId": 24,
+      "taskTitle": "Comprehensive Testing & Quality Assurance",
+      "complexityScore": 7,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Comprehensive Testing & Quality Assurance task into 4 specific subtasks covering unit/integration testing, end-to-end testing, performance testing, and security testing implementation",
+      "reasoning": "Building comprehensive testing strategy requires knowledge of multiple testing methodologies, frameworks, and integration with CI/CD pipelines"
+    },
+    {
+      "taskId": 25,
+      "taskTitle": "Production Deployment & Launch Preparation",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the Production Deployment & Launch Preparation task into 4 specific subtasks covering monitoring setup, support systems implementation, backup procedures, and onboarding material creation",
+      "reasoning": "Preparing for production launch involves moderate complexity with monitoring, support, and operational readiness across multiple system components"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "name": "mabos-workbench",
+  "version": "1.0.0",
+  "description": "Multi-Agent Business Operating System - Revolutionary synthesis of theoretical BDI architecture with practical workflow orchestration",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && python -m build",
+    "start": "npm run start:frontend & npm run start:backend",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "clean": "npm run clean:frontend && npm run clean:backend",
+    "clean:frontend": "cd frontend && rm -rf .next node_modules dist",
+    "clean:backend": "cd backend && rm -rf __pycache__ .pytest_cache dist build *.egg-info",
+    
+    "test": "npm run test:frontend && npm run test:backend && npm run test:integration",
+    "test:frontend": "cd frontend && npm run test",
+    "test:backend": "cd backend && python -m pytest",
+    "test:integration": "npm run test:api && npm run test:db && npm run test:integrations",
+    "test:api": "cd tests/integration && npm run test:api",
+    "test:db": "cd tests/integration && npm run test:db", 
+    "test:integrations": "cd tests/integration && npm run test:integrations",
+    "test:e2e": "cd tests/e2e && npx playwright test",
+    "test:visual": "cd tests/e2e && npx playwright test --grep visual",
+    "test:browsers": "cd tests/e2e && npx playwright test --project=chromium --project=firefox --project=webkit",
+    "test:coverage": "npm run test:coverage:frontend && npm run test:coverage:backend",
+    "test:coverage:frontend": "cd frontend && npm run test:coverage",
+    "test:coverage:backend": "cd backend && python -m pytest --cov=app --cov-report=html --cov-report=term-missing",
+    
+    "test:load": "cd tests/performance && k6 run load-test.js",
+    "test:stress": "cd tests/performance && k6 run stress-test.js",
+    "test:performance": "cd tests/performance && npm run test:performance",
+    
+    "test:security": "npm run test:security:frontend && npm run test:security:backend",
+    "test:security:frontend": "cd frontend && npm audit",
+    "test:security:backend": "cd backend && python -m bandit -r app/",
+    "test:vulnerabilities": "cd tests/security && npm run test:vulnerabilities",
+    "test:pentest": "cd tests/security && npm run test:pentest",
+    
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && python -m flake8 app/ && python -m mypy app/",
+    "format": "npm run format:frontend && npm run format:backend",
+    "format:frontend": "cd frontend && npm run format",
+    "format:backend": "cd backend && python -m black app/ && python -m isort app/",
+    "type-check": "npm run type-check:frontend && npm run type-check:backend",
+    "type-check:frontend": "cd frontend && npm run type-check",
+    "type-check:backend": "cd backend && python -m mypy app/",
+    "pre-commit": "npm run lint && npm run type-check && npm run test",
+    
+    "db:migrate": "cd backend && alembic upgrade head",
+    "db:seed": "cd backend && python scripts/seed_database.py",
+    "db:reset": "cd backend && alembic downgrade base && alembic upgrade head && python scripts/seed_database.py",
+    "db:generate": "cd backend && alembic revision --autogenerate",
+    
+    "api:generate": "cd shared && npx @openapitools/openapi-generator-cli generate -i ../backend/openapi.json -g typescript-fetch -o types/api",
+    "api:validate": "cd backend && python scripts/validate_openapi.py",
+    "api:test": "cd tests/api && npm run test",
+    
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    
+    "deploy:dev": "npm run build && ./scripts/deploy/deploy-dev.sh",
+    "deploy:staging": "npm run build && ./scripts/deploy/deploy-staging.sh", 
+    "deploy:prod": "npm run build && ./scripts/deploy/deploy-prod.sh",
+    
+    "docs:dev": "cd docs && mkdocs serve",
+    "docs:build": "cd docs && mkdocs build",
+    "docs:deploy": "cd docs && mkdocs gh-deploy",
+    
+    "setup": "npm run install:all && npm run db:migrate && npm run db:seed",
+    "reset": "npm run clean && npm run setup"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.1.0",
+    "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.17.0",
+    "npm": ">=9.0.0",
+    "python": ">=3.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mabos/mabos-workbench.git"
+  },
+  "keywords": [
+    "multi-agent",
+    "business-automation",
+    "bdi-architecture",
+    "workflow-orchestration",
+    "enterprise-ai",
+    "llm-integration",
+    "conversational-ai"
+  ],
+  "author": "MABOS Development Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mabos/mabos-workbench/issues"
+  },
+  "homepage": "https://github.com/mabos/mabos-workbench#readme",
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
+  "lint-staged": {
+    "frontend/**/*.{js,jsx,ts,tsx}": [
+      "cd frontend && npm run lint:fix",
+      "cd frontend && npm run format"
+    ],
+    "backend/**/*.py": [
+      "cd backend && python -m black",
+      "cd backend && python -m isort",
+      "cd backend && python -m flake8"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run test"
+    }
+  }
+}

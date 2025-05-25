@@ -1,0 +1,305 @@
+{
+  "schema_version": "1.1",
+  "analysis_metadata": {
+    "language": "TypeScript",
+    "total_lines_analyzed": 15733,
+    "analysis_timestamp": "2025-01-25T18:07:16Z"
+  },
+  "file_structure": {
+    "AgentDock_MABOS": { "type": "directory", "children": [
+      ".git", ".github", ".husky", ".cursor", "agentdock-core", "agents", "docs", "public", "scripts", "src", "tests",
+      "package.json", "README.md", "LICENSE", "tsconfig.json", "next.config.ts", "tailwind.config.ts", "components.json",
+      "docker-compose.yaml", "jest.config.ts", "eslint.config.js", "postcss.config.js", "vercel.json", "pnpm-lock.yaml"
+    ]},
+    "AgentDock_MABOS/agentdock-core": { "type": "directory", "children": [
+      "src", "client", "package.json", "README.md", "tsconfig.json", "pnpm-lock.yaml"
+    ]},
+    "AgentDock_MABOS/agentdock-core/src": { "type": "directory", "children": [
+      "types", "nodes", "llm", "storage", "session", "orchestration", "evaluation", "logging", "errors", "config", "utils", "messaging", "client", "test", "index.ts", "types.ts"
+    ]},
+    "AgentDock_MABOS/src": { "type": "directory", "children": [
+      "app", "components", "types", "lib", "hooks", "config", "nodes", "assets", "global.d.ts"
+    ]},
+    "AgentDock_MABOS/agents": { "type": "directory", "children": [
+      "example-agent", "gemini-deep-research", "prd-creator", "marketing-prompt-library", "small-claims", "deepseek-agent", "gemma-research", "mental-health-guide", "qwen-agent", "gemini-visual", "avalanche-explorer", "avalanche-builder"
+    ]},
+    "AgentDock_MABOS/package.json": { "type": "file" },
+    "AgentDock_MABOS/README.md": { "type": "file" },
+    "AgentDock_MABOS/agentdock-core/package.json": { "type": "file" },
+    "AgentDock_MABOS/agentdock-core/src/index.ts": { "type": "file" }
+  },
+  "entities": [
+    {
+      "id": "package.json:agentdock-web",
+      "path": "AgentDock_MABOS/package.json",
+      "name": "agentdock-web",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Next.js application package configuration",
+      "line_start": 1,
+      "line_end": 176
+    },
+    {
+      "id": "agentdock-core/package.json:agentdock-core",
+      "path": "AgentDock_MABOS/agentdock-core/package.json",
+      "name": "agentdock-core",
+      "kind": "package",
+      "scope": "global",
+      "signature": "Core framework library package",
+      "line_start": 1,
+      "line_end": 39
+    },
+    {
+      "id": "agentdock-core/src/index.ts:CoreLLM",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "CoreLLM",
+      "kind": "export",
+      "scope": "module",
+      "signature": "export * from './llm'",
+      "line_start": 81,
+      "line_end": 81
+    },
+    {
+      "id": "agentdock-core/src/index.ts:BaseNode",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "BaseNode",
+      "kind": "export",
+      "scope": "module",
+      "signature": "export * from './nodes'",
+      "line_start": 36,
+      "line_end": 36
+    },
+    {
+      "id": "agentdock-core/src/index.ts:AgentNode",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "AgentNode",
+      "kind": "export",
+      "scope": "module",
+      "signature": "export * from './nodes'",
+      "line_start": 36,
+      "line_end": 36
+    },
+    {
+      "id": "agentdock-core/src/index.ts:OrchestrationManager",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "OrchestrationManager",
+      "kind": "import",
+      "scope": "module",
+      "signature": "OrchestrationManager from './orchestration/index'",
+      "line_start": 95,
+      "line_end": 95
+    },
+    {
+      "id": "agentdock-core/src/index.ts:createOrchestrationManager",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "createOrchestrationManager",
+      "kind": "export",
+      "scope": "module",
+      "signature": "factory function for OrchestrationManager",
+      "line_start": 105,
+      "line_end": 105
+    },
+    {
+      "id": "agentdock-core/src/index.ts:loadAgentConfig",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "loadAgentConfig",
+      "kind": "export",
+      "scope": "module",
+      "signature": "loadAgentConfig from './config/agent-config'",
+      "line_start": 55,
+      "line_end": 55
+    },
+    {
+      "id": "agentdock-core/src/index.ts:RedisStorageProvider",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "RedisStorageProvider",
+      "kind": "export",
+      "scope": "module",
+      "signature": "Redis storage implementation",
+      "line_start": 63,
+      "line_end": 63
+    },
+    {
+      "id": "agentdock-core/src/index.ts:runEvaluation",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "runEvaluation",
+      "kind": "export",
+      "scope": "module",
+      "signature": "Evaluation runner function",
+      "line_start": 175,
+      "line_end": 175
+    },
+    {
+      "id": "agentdock-core/src/index.ts:RuleBasedEvaluator",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "RuleBasedEvaluator",
+      "kind": "export",
+      "scope": "module",
+      "signature": "Rule-based evaluation system",
+      "line_start": 177,
+      "line_end": 177
+    },
+    {
+      "id": "agentdock-core/src/index.ts:LLMJudgeEvaluator",
+      "path": "AgentDock_MABOS/agentdock-core/src/index.ts",
+      "name": "LLMJudgeEvaluator",
+      "kind": "export",
+      "scope": "module",
+      "signature": "LLM-based evaluation system",
+      "line_start": 178,
+      "line_end": 178
+    },
+    {
+      "id": "package.json:dependencies",
+      "path": "AgentDock_MABOS/package.json",
+      "name": "dependencies",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "Runtime dependencies including Next.js, React, Radix UI, AgentDock Core",
+      "line_start": 31,
+      "line_end": 105
+    },
+    {
+      "id": "package.json:scripts",
+      "path": "AgentDock_MABOS/package.json",
+      "name": "scripts",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "Build, dev, test, and deployment scripts",
+      "line_start": 9,
+      "line_end": 30
+    },
+    {
+      "id": "agentdock-core/package.json:dependencies",
+      "path": "AgentDock_MABOS/agentdock-core/package.json",
+      "name": "dependencies",
+      "kind": "variable",
+      "scope": "module",
+      "signature": "Core framework dependencies: AI SDK, LLM providers, storage providers",
+      "line_start": 14,
+      "line_end": 27
+    },
+    {
+      "id": "types/messages.ts:CoreMessage",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/messages.ts",
+      "name": "CoreMessage",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Core message interface for agent communication",
+      "line_start": 1,
+      "line_end": 30
+    },
+    {
+      "id": "types/agent-config.ts:AgentConfig",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/agent-config.ts",
+      "name": "AgentConfig",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Agent configuration interface",
+      "line_start": 1,
+      "line_end": 50
+    },
+    {
+      "id": "types/orchestration.ts:OrchestrationState",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/orchestration.ts",
+      "name": "OrchestrationState",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Orchestration state management interface",
+      "line_start": 1,
+      "line_end": 40
+    },
+    {
+      "id": "types/session.ts:SessionConfig",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/session.ts",
+      "name": "SessionConfig",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Session configuration interface",
+      "line_start": 1,
+      "line_end": 35
+    },
+    {
+      "id": "types/tools.ts:Tool",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/tools.ts",
+      "name": "Tool",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Tool interface for agent capabilities",
+      "line_start": 1,
+      "line_end": 60
+    },
+    {
+      "id": "types/storage.ts:StorageProvider",
+      "path": "AgentDock_MABOS/agentdock-core/src/types/storage.ts",
+      "name": "StorageProvider",
+      "kind": "interface",
+      "scope": "module",
+      "signature": "Storage provider abstraction interface",
+      "line_start": 1,
+      "line_end": 45
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "agentdock-core/src/index.ts:OrchestrationManager",
+      "to_id": "types/orchestration.ts:OrchestrationState",
+      "type": "uses_imported_symbol",
+      "line_number": 95
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:BaseNode",
+      "to_id": "types/messages.ts:CoreMessage",
+      "type": "uses_imported_symbol",
+      "line_number": 36
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:AgentNode",
+      "to_id": "agentdock-core/src/index.ts:BaseNode",
+      "type": "inherits",
+      "line_number": 36
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:RedisStorageProvider",
+      "to_id": "types/storage.ts:StorageProvider",
+      "type": "implements",
+      "line_number": 63
+    },
+    {
+      "from_id": "package.json:agentdock-web",
+      "to_id": "agentdock-core/package.json:agentdock-core",
+      "type": "imports_symbol",
+      "line_number": 73
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:CoreLLM",
+      "to_id": "types/tools.ts:Tool",
+      "type": "uses_imported_symbol",
+      "line_number": 81
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:runEvaluation",
+      "to_id": "agentdock-core/src/index.ts:RuleBasedEvaluator",
+      "type": "calls",
+      "line_number": 175
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:loadAgentConfig",
+      "to_id": "types/agent-config.ts:AgentConfig",
+      "type": "returns_data_to",
+      "line_number": 55
+    },
+    {
+      "from_id": "package.json:scripts",
+      "to_id": "agentdock-core/package.json:agentdock-core",
+      "type": "calls",
+      "line_number": 27
+    },
+    {
+      "from_id": "agentdock-core/src/index.ts:createOrchestrationManager",
+      "to_id": "agentdock-core/src/index.ts:OrchestrationManager",
+      "type": "instantiates",
+      "line_number": 105
+    }
+  ]
+} 
