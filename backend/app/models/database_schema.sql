@@ -102,6 +102,30 @@ CREATE TABLE organization_members (
 );
 
 -- =====================================================
+-- BUSINESS ONBOARDING TABLES
+-- =====================================================
+
+-- Businesses table for onboarded ventures
+CREATE TABLE IF NOT EXISTS businesses (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(500) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    legal_name VARCHAR(500),
+    description TEXT,
+    jurisdiction VARCHAR(100),
+    stage VARCHAR(50) DEFAULT 'mvp',
+    status VARCHAR(50) DEFAULT 'active',
+    agent_roles JSONB DEFAULT '[]'::jsonb,
+    ontology_stats JSONB DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Index for business lookups
+CREATE INDEX IF NOT EXISTS idx_businesses_type ON businesses(type);
+CREATE INDEX IF NOT EXISTS idx_businesses_status ON businesses(status);
+
+-- =====================================================
 -- WORKFLOW MANAGEMENT TABLES
 -- =====================================================
 

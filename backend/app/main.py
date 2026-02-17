@@ -6,11 +6,12 @@ Implements BDI (Belief-Desire-Intention) architecture for intelligent workflow a
 """
 
 from datetime import datetime
-from typing import Dict, Any
+from typing import Dict, Any, List, Optional
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 import logging
 
 from app import __version__
@@ -301,6 +302,176 @@ async def sync_workflow_to_knowledge_graph(workflow_data: Dict[str, Any]) -> Dic
             "success": False,
             "error": str(e),
             "timestamp": datetime.utcnow().isoformat()
+        }
+
+
+# ===== BUSINESS ONBOARDING ENDPOINTS =====
+
+class BusinessOnboardRequest(BaseModel):
+    business_id: str
+    business_name: str
+    business_type: str
+    agent_roles: List[str]
+    sbvr_export: Dict[str, Any]  # {conceptTypes, factTypes, rules, proofTables}
+
+
+@app.post("/api/businesses/onboard", response_model=Dict[str, Any])
+async def onboard_business(request: BusinessOnboardRequest) -> Dict[str, Any]:
+    """
+    Onboard a new business: create DB record, load SBVR ontology into Neo4j,
+    create agent nodes, and cache initial state.
+
+    Args:
+        request: Business onboarding payload with SBVR export data
+
+    Returns:
+        Dict with success status, business_id, agent_ids, and ontology_stats
+    """
+    try:
+        db_manager = await get_database_manager()
+        now = datetime.utcnow()
+        agent_ids = []
+        ontology_stats = {
+            "concept_types": 0,
+            "fact_types": 0,
+            "rules": 0,
+            "proof_tables": 0,
+        }
+
+        # 1. PostgreSQL: Create business record
+        try:
+            create_sql = """
+                INSERT INTO businesses (id, name, type, status, agent_roles, created_at, updated_at)
+                VALUES ($1, $2, $3, 'active', $4, $5, $5)
+                ON CONFLICT (id) DO UPDATE SET
+                    name = EXCLUDED.name,
+                    type = EXCLUDED.type,
+                    agent_roles = EXCLUDED.agent_roles,
+                    updated_at = EXCLUDED.updated_at
+            """
+            import json
+            await db_manager.postgres.execute_query(
+                create_sql,
+                [
+                    request.business_id,
+                    request.business_name,
+                    request.business_type,
+                    json.dumps(request.agent_roles),
+                    now,
+                ]
+            )
+            logger.info(f"Business record created/updated: {request.business_id}")
+        except Exception as e:
+            logger.warning(f"PostgreSQL business insert failed (non-fatal): {e}")
+
+        # 2. Neo4j: Load SBVR ontology
+        try:
+            from app.models.neo4j_manager import SBVROntologyManager
+            neo4j_session = db_manager.neo4j.driver.session() if db_manager.neo4j.driver else None
+
+            if neo4j_session:
+                sbvr_mgr = SBVROntologyManager(neo4j_session)
+
+                # Create concept types
+                for ct in request.sbvr_export.get("conceptTypes", []):
+                    await sbvr_mgr.create_concept_type(ct)
+                    ontology_stats["concept_types"] += 1
+
+                # Create fact types
+                for ft in request.sbvr_export.get("factTypes", []):
+                    await sbvr_mgr.create_fact_type(ft)
+                    ontology_stats["fact_types"] += 1
+
+                # Create business rules
+                for rule in request.sbvr_export.get("rules", []):
+                    await sbvr_mgr.create_business_rule(rule)
+                    ontology_stats["rules"] += 1
+
+                # Create proof tables
+                for pt in request.sbvr_export.get("proofTables", []):
+                    await sbvr_mgr.create_proof_table(pt)
+                    ontology_stats["proof_tables"] += 1
+
+                # Establish SBVR relationships
+                await sbvr_mgr.establish_sbvr_relationships()
+
+                # Create Agent nodes linked to business
+                for role in request.agent_roles:
+                    agent_id = f"{request.business_id}/{role}"
+                    create_agent_query = """
+                        MERGE (b:Business {id: $business_id})
+                        ON CREATE SET b.name = $business_name, b.type = $business_type, b.created_at = datetime()
+                        MERGE (a:Agent {id: $agent_id})
+                        ON CREATE SET a.role = $role, a.status = 'active', a.created_at = datetime()
+                        MERGE (a)-[:BELONGS_TO]->(b)
+                        RETURN a.id AS agent_id
+                    """
+                    result = await db_manager.neo4j.execute_cypher_query(
+                        create_agent_query,
+                        {
+                            "business_id": request.business_id,
+                            "business_name": request.business_name,
+                            "business_type": request.business_type,
+                            "agent_id": agent_id,
+                            "role": role,
+                        }
+                    )
+                    agent_ids.append(agent_id)
+
+                await neo4j_session.close()
+                logger.info(f"Neo4j ontology loaded for {request.business_id}: {ontology_stats}")
+        except Exception as e:
+            logger.warning(f"Neo4j operations failed (non-fatal): {e}")
+
+        # 3. Redis: Cache business state
+        try:
+            cache_data = {
+                "business_id": request.business_id,
+                "business_name": request.business_name,
+                "business_type": request.business_type,
+                "agent_roles": request.agent_roles,
+                "agent_ids": agent_ids,
+                "ontology_stats": ontology_stats,
+                "status": "active",
+                "cached_at": now.isoformat(),
+            }
+            await db_manager.redis.set_cache(
+                f"business:{request.business_id}",
+                cache_data,
+                ttl=86400,  # 24h TTL
+            )
+            logger.info(f"Business state cached for {request.business_id}")
+        except Exception as e:
+            logger.warning(f"Redis caching failed (non-fatal): {e}")
+
+        # Update PostgreSQL with ontology stats
+        try:
+            import json
+            update_sql = """
+                UPDATE businesses SET ontology_stats = $1, updated_at = $2 WHERE id = $3
+            """
+            await db_manager.postgres.execute_query(
+                update_sql,
+                [json.dumps(ontology_stats), now, request.business_id]
+            )
+        except Exception as e:
+            logger.warning(f"PostgreSQL stats update failed (non-fatal): {e}")
+
+        return {
+            "success": True,
+            "business_id": request.business_id,
+            "agent_ids": agent_ids,
+            "ontology_stats": ontology_stats,
+            "timestamp": now.isoformat(),
+        }
+
+    except Exception as e:
+        logger.error(f"Business onboarding failed: {e}", exc_info=True)
+        return {
+            "success": False,
+            "business_id": request.business_id,
+            "error": str(e),
+            "timestamp": datetime.utcnow().isoformat(),
         }
 
 
